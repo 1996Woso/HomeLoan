@@ -1,0 +1,110 @@
+﻿@model Customer
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@* This was added for displaying message after submitting  *@
+<!-- Add this to your HTML file to include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<form method="post" asp-action="Edit" id="Edit" onsubmit="return Submit(event)">
+	<div class="border p-3 mt-3">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Customer</h2>
+			<hr />
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" type="text" required/>
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="GrossSalary"></label>
+			<input asp-for="GrossSalary" class="form-control" type="number" required/>
+			<span asp-validation-for="GrossSalary" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="CreditScore"></label>
+			<input asp-for="CreditScore" class="form-control" type="number" required/>
+			<span asp-validation-for="CreditScore" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="PurchasePrice"></label>
+			<input asp-for="PurchasePrice" class="form-control" type="number" required/>
+			<span asp-validation-for="PurchasePrice" class="text-danger"></span>
+		</div>
+		@* <div class="mb-3">
+			<input asp-for="Loan_Application_Status" class="form-control" hidden/>
+		</div>
+		<div class="mb-3">
+			<input asp-for="Maximum_Installment_Amount" class="form-control" hidden/>
+		</div>
+		<div class="mb-3">
+			<input asp-for="Percentage_Home_Loan_Granted" class="form-control" hidden/>
+		</div>
+		<div class="mb-3">
+			<input asp-for="Deposit_Required" class="form-control" hidden/>
+		</div>
+	    <div class="mb-3">
+			<input asp-for="Monthly_Installment" class="form-control" hidden/>
+	    </div> *@
+
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Customer" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back To List
+		</a>
+
+	</div>
+</form>
+
+@*Display message after clicking the button*@
+<script>
+	function Submit(event) {
+		// Prevent default form submission
+		event.preventDefault();
+
+		//Check if inputs are filled
+		let name = $("#Name").val();
+		let l = name.length;
+		let salary = parseFloat($("#GrossSalary").val());
+		let score = parseInt($("#CreditScore").val());
+		let price = parseFloat($("#PurchasePrice").val());
+
+		// Perform your client-side validations here
+		if (name && salary && score && price) {
+			if (l > 1 && salary > 0 && salary <= 1000000 && score >= 0 && score <= 1200 && price > 0 && price <= 10000000) {
+				Swal.fire(
+					{
+						icon: 'success',
+						title: 'Success!',
+						text: 'Successfully Edited.',
+					}).then(() => {
+						document.getElementById('Edit').submit();
+					});
+				return true; // Allow form submission if validation passes
+			}
+			else {
+				// Show error message
+				Swal.fire
+					(
+						{
+							icon: 'error',
+							title: 'Error!',
+							text: 'Please fill in all required fields correctly.'
+						}
+					);
+				return false; // Prevent form submission if validation fails
+			}
+
+		}
+		else {
+			// Show an error message or handle validations appropriately
+			Swal.fire({
+				icon: 'error',
+				title: 'Error!',
+				text: 'Please fill in all required fields correctly.'
+			});
+		}
+	}
+</script>
+
+

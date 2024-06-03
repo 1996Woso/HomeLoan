@@ -1,0 +1,66 @@
+﻿@model List<Customer>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Home_Loan_App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @*The code is commented becsuse we will use bootswatchTheme.css*@
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true"/>
+    @*this is for bootstrap icons*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <marquee>
+        Welcome to City of Joburg Home Loans.
+    </marquee>
+    <div class="container">
+        <div class="row">
+            <!-- First column (Search Form) -->
+            <div class="col-lg-6 mb-3">
+        @*         <div class="col-6 text-end">
+                    <p>To apply for a loan click this button.</p>
+                    <a asp-controller="Customer" asp-action="Create" class="btn btn-primary" style="background-color:orange">
+                        <i class="bi bi-plus-circle"></i> &nbsp; Apply Online
+                    </a>
+                </div> *@
+          
+                @*          @if (Model.Any())
+                {
+                <table class="table table-striped">
+                <tr>
+                <td><strong>Suspect No</strong></td>
+                <td>@Model.First().SuspectNo</td>
+                </tr>
+                <tr>
+                <td>ID</td>
+                <td>@Model.First().ID</td>
+                </tr>
+                <tr>
+                <td>First Name</td>
+                <td>@Model.First().FirstName</td>
+                </tr>
+                <tr>
+                <td>Last Name</td>
+                <td>@Model.First().LastName</td>
+                </tr>
+                </table>
+                } *@
+             </div>
+            
+        </div>
+    </div>
+</body>
+
+
+</html>

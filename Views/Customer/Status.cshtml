@@ -1,0 +1,202 @@
+﻿@model Customer
+<h1>Loan Application Status</h1>
+
+<form asp-action="Status">
+	@* When Qualifies *@
+	@if (Model.CreditScore >= 550 && Model.MonthlyInstallment() <= 0.3 * Model.GrossSalary)
+	{
+		<table class="table table-success table-striped">
+			<tr>
+				<td>Name</td>
+				<td>
+					<p>@ViewBag.Name</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Application Status</td>
+				<td>
+					<p>@ViewBag.LoanStatus</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Maximum Installment Amount</td>
+				<td>
+					<p>@ViewBag.MaximumInstallment.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Percentage Home Loan Granted</td>
+				<td>
+					<p>@ViewBag.LoanPercentage%</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Amount Granted</td>
+				<td>
+					<p>@ViewBag.LoanAmaountGranted.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Deposit Required</td>
+				<td>
+					<p>@ViewBag.Deposit.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Monthly Installment</td>
+				<td>
+					<p>@ViewBag.MonthlyInstallment.ToString("C2")</p>
+				</td>
+			</tr>
+
+		</table>
+		<h1>Recommendation</h1>
+		<p>Congrats!! , you made it, you qualified for the loan.</p>
+		<p>You also qualify for loan with bigger value.</p>
+		<p>Here is the summary for your limit.</p>
+		<table class="table table-active table-success">
+			<tr>
+				<td>Maximum Loan</td>
+				<td>
+					<p>@ViewBag.MaxAffordLoan.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Maximum Deposit</td>
+				<td>
+					<p>@ViewBag.MaximumDeposit.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Maximum Installment Amount</td>
+				<td>
+					<p>@ViewBag.MaximumInstallment.ToString("C2")</p>
+				</td>
+			</tr>
+		</table>
+	}
+	@* When Credit Score is good but can not afford Monthly Installment *@
+	else if (Model.CreditScore >= 550 && Model.MonthlyInstallment() >0.3 * Model.GrossSalary)
+	{
+		<table class="table table-warning">
+			<tr>
+				<td>Name</td>
+				<td>
+					<p>@ViewBag.Name</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Application Status</td>
+				<td>
+					<p>@ViewBag.LoanStatus</p>
+				</td>
+			</tr>
+		</table>
+		<h1>Recommendation</h1>
+		<p>
+			Your Loan Application is declined because, the monthly installment for it is @ViewBag.MonthlyInstallment.ToString("C2") and you can only afford monthly installment of @ViewBag.MaximumInstallment.ToString("C2")
+			or less.
+		</p>
+		<p>
+			We recommend you to apply for a loan not more than @ViewBag.MaxAffordLoan.ToString("C2") .
+		</p>
+		<p>
+			If you apply for a loan of @ViewBag.MaxAffordLoan.ToString("C2") , the status will be .
+		</p>
+		<table class="table table-success">
+			<tr>
+				<td>Name</td>
+				<td>
+					<p>@ViewBag.Name</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Application Status</td>
+				<td>
+					<p>Granted
+				</td>
+			</tr>
+			<tr>
+				<td>Maximum Installment Amount</td>
+				<td>
+					<p>@ViewBag.MaximumInstallment.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Percentage Home Loan Granted</td>
+				<td>
+					<p>@ViewBag.LoanPercentage%</p>
+				</td>
+			</tr>
+		@* 	<tr>
+				<td>Loan Amount Granted</td>
+				<td>
+					<p>@ViewBag.LoanAmaountGranted.ToString("C2")</p>
+				</td>
+			</tr> *@
+			<tr>
+				<td>Deposit Required</td>
+				<td>
+					<p>@ViewBag.MaximumDeposit.ToString("C2")</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Monthly Installment</td>
+				<td>
+					<p>@ViewBag.MaximumMonthlyInstallment.ToString("C2")</p>
+				</td>
+			</tr>
+
+		</table>
+
+	}
+	@* When Credit Score is bad but can afford Monthly Installment *@
+	else if(Model.CreditScore<550 && Model.MonthlyInstallment() <= Model.MaximumInstallment())
+	{
+		<table class="table table-warning">
+			<tr>
+				<td>Name</td>
+				<td>
+					<p>@ViewBag.Name</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Application Status</td>
+				<td>
+					<p>@ViewBag.LoanStatus</p>
+				</td>
+			</tr>
+		</table>
+		<h1>Recommendation</h1>
+		<p>
+			Your loan application is declined because your Credit Score is too low, you do afford monthly install.
+		</p>
+		<p>Please apply again when your Credit Score is atleast 550 points.</p>
+	}
+	@* When Credit Score is bad and can not afford Monthly Installment *@
+	else
+	{
+		<table class="table table-warning">
+			<tr>
+				<td>Name</td>
+				<td>
+					<p>@ViewBag.Name</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Loan Application Status</td>
+				<td>
+					<p>@ViewBag.LoanStatus</p>
+				</td>
+			</tr>
+		</table>
+		<h1>Recommendation</h1>
+		<p>You got declined because you fail from both criteriors .</p>
+		<p>Your Credit Score is below to 550 and you do not afford installme , you can only afford installment not more than @ViewBag.MaximumMonthlyInstallment.ToString("C2")</p>
+	}
+	<br />
+	<a asp-controller="Customer" asp-action="Index" class="btn btn-primary" style="width:150px">
+		Back To List
+	</a>
+	<p id="recomend"></p>
+</form>

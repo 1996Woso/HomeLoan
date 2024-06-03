@@ -1,0 +1,97 @@
+﻿@model Customer
+@* This was added for displaying message after submitting  *@
+<!-- Add this to your HTML file to include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<form method="post" asp-action="Delete" id="delete" onsubmit="return Delete(event)">
+	<div class="border p-3 mt-3">
+		<div class="row pb-2">
+			<h2 class="text-primary">Delete Customer</h2>
+			<hr />
+		</div>
+
+		<div class="mb-3">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="GrossSalary"></label>
+			<input asp-for="GrossSalary" class="form-control" />
+			<span asp-validation-for="GrossSalary" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="CreditScore"></label>
+			<input asp-for="CreditScore" class="form-control" />
+			<span asp-validation-for="CreditScore" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="PurchasePrice"></label>
+			<input asp-for="PurchasePrice" class="form-control" />
+			<span asp-validation-for="PurchasePrice" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Maximum_Installment_Amount"></label>
+			<input asp-for="Maximum_Installment_Amount" class="form-control"  />
+			@* 	<span asp-validation-for="Maximum_Installment_Amount" class="text-danger"></span> *@
+		</div>
+		<div class="mb-3">
+			<label asp-for="Percentage_Home_Loan_Granted"></label>
+			<input asp-for="Percentage_Home_Loan_Granted" class="form-control" />
+			@* <span asp-validation-for="Percentage_Home_Loan_Granted" class="text-danger"></span> *@
+		</div>
+		<div class="mb-3">
+			<label asp-for="Deposit_Required"></label>
+			<input asp-for="Deposit_Required" class="form-control"/>
+			@* <span asp-validation-for="Deposit_Required" class="text-danger"></span> *@
+		</div>
+		<div class="mb-3">
+			<label asp-for="Loan_Application_Status"></label>
+			<input asp-for="Loan_Application_Status" class="form-control" />
+			@* 	<span asp-validation-for="Loan_Application_Status" class="text-danger"></span> *@
+		</div>
+		<div class="mb-3">
+			<label asp-for="Monthly_Installment"></label>
+			<input asp-for="Monthly_Installment" class="form-control" />
+			@*   <span asp-validation-for="Monthly_Installment" class="text-danger"></span> *@
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+		<a asp-controller="Customer" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back To List
+		</a>
+
+	</div>
+</form>
+
+@*Display message after clicking the button*@
+<script>
+	async function Delete(event) {
+		event.preventDefault(); // Prevent the default form submission
+
+		const result = await Swal.fire({
+			icon: 'warning',
+			title: 'Are you sure you want to delete this customer?',
+			text: 'You won\'t be able to revert this!',
+			showCancelButton: true,
+			confirmButtonText: 'Yes, delete it!',
+			cancelButtonText: 'No, cancel!',
+		});
+
+		if (result.isConfirmed) {
+			document.getElementById('delete').submit();
+
+			Swal.fire({
+				icon: 'success',
+				title: 'Customer deleted successfully!',
+				showConfirmButton: true,
+				//timer: 120000 // Adjust the timer as needed
+			}); 
+			
+			return true;
+		}
+	}
+</script>
+
+
