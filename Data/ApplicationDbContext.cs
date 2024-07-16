@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;//Install this package to inherit DbContext
 
 namespace Home_Loan_App.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {

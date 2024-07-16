@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //This is done after connecting MsServer and creating a table on  (appsettings.json and ApplictationsDbContext.cs
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection")
+            builder.Configuration.GetConnectionString("Somee")
             ));/* after writing this code , install Microsoft.EntityFrameworkCore.SqlServer
                 * Then Add a migration (first install Microsoft.EntityFrameworkCore.Tools)
                 * to add migration go to toolS>Nuget Package manager>package manager console
