@@ -25,12 +25,28 @@
       "PackagePath": "staticwebassets\\Images\\joburg-logo.jpg"
     },
     {
+      "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\datatable.css",
+      "PackagePath": "staticwebassets\\css\\datatable.css"
+    },
+    {
+      "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\datatable_1.12_min.css",
+      "PackagePath": "staticwebassets\\css\\datatable_1.12_min.css"
+    },
+    {
+      "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\datatable_2.2.3_min.css",
+      "PackagePath": "staticwebassets\\css\\datatable_2.2.3_min.css"
+    },
+    {
       "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\index.css",
       "PackagePath": "staticwebassets\\css\\index.css"
     },
     {
       "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
       "Id": "C:\\Users\\10114629\\source\\repos\\Eviwe\\HomeLoan\\wwwroot\\favicon.ico",
